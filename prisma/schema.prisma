@@ -1,0 +1,52 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model users {
+  id       String        @id
+  email    String        @db.VarChar(255)
+  password String
+  role     String
+  avatar   String?
+  comments comments[]
+  records  records[]
+  patient  user_doctor[] @relation(name: "patient")
+  doctor   user_doctor[] @relation(name: "doctor")
+}
+
+model comments {
+  id         String   @id
+  author     users    @relation(fields: [author_id], references: [id], onDelete: Cascade)
+  author_id  String
+  record     records  @relation(fields: [record_id], references: [id], onDelete: Cascade)
+  record_id  String
+  created_at DateTime
+  text       String
+}
+
+model records {
+  id                 String     @id
+  author             users      @relation(fields: [author_id], references: [id], onDelete: Cascade)
+  author_id          String
+  time               DateTime
+  bl_pressure_top    Int
+  bl_pressure_bottom Int
+  well_being         Int
+  meal               String
+  activity           Int
+  note               String
+  comments           comments[]
+}
+
+model user_doctor {
+  id         String  @id
+  patient    users?  @relation(name: "patient", fields: [patient_id], references: [id], onDelete: SetNull)
+  patient_id String?
+  doctor     users?  @relation(name: "doctor", fields: [doctor_id], references: [id], onDelete: SetNull)
+  doctor_id  String?
+}
