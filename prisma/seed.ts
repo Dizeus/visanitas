@@ -4,6 +4,7 @@ import createUsers from './seeds/users';
 import createUserDoctor from './seeds/user_doctor';
 import createRecords from './seeds/records';
 import createComments from './seeds/comments';
+import createTestUser from './seeds/test-user';
 
 const main = async () => {
   await prisma.records.deleteMany();
@@ -14,7 +15,6 @@ const main = async () => {
   await prisma.users.createMany({
     data: await createUsers(),
   });
-
   await prisma.user_doctor.createMany({
     data: await createUserDoctor(),
   });
@@ -26,6 +26,8 @@ const main = async () => {
   await prisma.comments.createMany({
     data: await createComments(),
   });
+  
+  await createTestUser();
 };
 
 main()

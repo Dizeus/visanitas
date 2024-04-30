@@ -11,6 +11,7 @@ model users {
   id       String        @id
   email    String        @db.VarChar(255)
   password String
+  fullname String
   role     String
   avatar   String?
   comments comments[]

@@ -7,6 +7,7 @@ export default async function createUsers() {
       id: faker.string.uuid(),
       email: faker.internet.email(),
       password: faker.internet.password(),
+      fullname: faker.person.fullName(),
       role: i === 0 ? 'doctor' : 'patient',
       avatar: null,
     });

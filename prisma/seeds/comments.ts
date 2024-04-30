@@ -14,7 +14,7 @@ export default async function createComments() {
         id: faker.string.uuid(),
         author_id: user.id,
         record_id:  record?.id,
-        text: faker.lorem.words(6),
+        text: faker.lorem.sentences(5),
         created_at: faker.date.between({
           from: "2017-01-01T00:00:00.000Z",
           to: "2022-01-01T00:00:00.000Z",
