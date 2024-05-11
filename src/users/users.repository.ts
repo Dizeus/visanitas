@@ -54,6 +54,9 @@ export class UsersRepository {
           contains: query,
           mode: 'insensitive'
         },
+        NOT: {
+          id: doctorId
+        },
         patient: {
           some: {
             doctor_id: doctorId
